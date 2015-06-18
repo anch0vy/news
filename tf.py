@@ -14,7 +14,7 @@ tagger = MeCab.Tagger('-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd')
 
 
 def extractKeyword(text):
-    """textを形態素解析して、名詞のみのリストを返す"""
+    '''return splited text by noun'''
     # tagger = MeCab.Tagger('')
     if type(text) == str:
         node = tagger.parseToNode(text)

@@ -55,6 +55,11 @@ newsCategorys = [
 
 
 def crawlNews(maxpage = 50, daylimit = False):
+    '''
+    crawling News
+    maxpage : max page value
+    daylimit : if daylimit = True, crawlNews() stop when count yesterday article
+    '''
     logging.basicConfig(filename='crawlNews_%d.log'%int(time.time()), filemode='w', level=logging.DEBUG)
     conn = MySQLdb.connect('192.168.1.2', 'root', 'db[ch[4075', 'data' , charset='utf8')
     cur = conn.cursor()
@@ -111,6 +116,9 @@ def crawlNews(maxpage = 50, daylimit = False):
             conn.commit()
 
 def maketfpickle():
+    '''
+    make and set tf-idf data and pickle it
+    '''
     conn = MySQLdb.connect('192.168.1.2', DBUSER, DBPASSWORD, 'data' , charset='utf8')
     cur = conn.cursor()
     for title,categoryName,url,relatedcategoryName in newsRssList:

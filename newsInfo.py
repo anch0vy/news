@@ -38,6 +38,7 @@ def getitems(xml,items):
 
 
 def getNewsInfo():
+	'''parse rss and get related article for page'''
 	newsInfos = []
 	for rss_title,categoryName,rssUrl,relatedcategoryName in newsRssList:
 		xmlRss = xmlParse(urllib2.urlopen(rssUrl))
