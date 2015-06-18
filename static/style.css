@@ -1,0 +1,23 @@
+.article{
+	text-align: left;
+}
+.article img{
+	float:right;
+}
+
+.articles {
+	position: relative;
+	left : 250px;
+}
+
+.article_title{
+	/*width:100%;*/
+}
+
+#sidebar {
+	width:250px;
+	height:100%;
+	float:left;
+	position: fixed;
+}
+

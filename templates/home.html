@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>anch0vy's news</title>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="static/remodal.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="static/remodal.css">
+        <link rel="stylesheet" type="text/css" href="static/remodal-default-theme.css">
+        <link rel="stylesheet" type="text/css" href="static/style.css">
+        <script>
+        function showArticles(clickId){
+            
+            for (var i = $(".articles").length - 1; i >= 0; i--) {
+                $(".articles")[i].style.display = "none";
+            };
+            $("#topic" + clickId)[0].style.display = "";
+        }
+        </script>
+    </head>
+    <body>
+        <div id="sidebar">
+            <h1>livedoor news</h1>
+            {% for title,rssInfo,articles in newss %}
+                <li onclick="showArticles(this.id)" id="{{ loop.index }}">{{ title }}</li>
+            {% endfor %}
+        </div>
+        {% for title,rssInfo,articles in newss %}
+            {% set loopNews = loop.index %}
+            <div id="topic{{ loop.index }}" class = "articles" style = "display:none">
+                <p>{{ rssInfo.title }}</p>
+                    {% for article in articles %}
+                        <div>
+                            <li data-remodal-target="modal{{ loopNews }}_{{ loop.index }}" class = "article_title">
+                                {{ article.title }} - {{ article.keyword }}
+                            </li>
+                            <ul>
+                            {% for a,id,osusume in article.osusume %}
+                                <li><a href="{{ id }}">{{ osusume }}</a></li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                        
+                        <div class="remodal" data-remodal-id="modal{{ loopNews }}_{{ loop.index }}">
+                          <button data-remodal-action="close" class="remodal-close"></button>
+                          <h2>{{ article.title }}</h2>
+                          <div class="article">{{ article.description|safe }}</div>
+                          <br>
+                        </div>
+                    {% endfor %}
+                </p>
+            </div>
+        {% endfor %}
+    </body>
+</html>
